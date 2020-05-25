@@ -147,6 +147,12 @@ class HuiInputNumberEntityRow extends LitElement implements LovelaceRow {
     }
 
     element.hidden = this.parentElement.clientWidth <= 350;
+    if (this.hass !== undefined && this._config !== undefined){
+      const stateObj = this.hass.states[this._config.entity];
+      if (stateObj.attributes.show_state){
+        element.hidden = false
+      }
+    }
   }
 
   private get _inputElement(): { value: string } {
